@@ -2,6 +2,7 @@ import { observable, action, flow } from 'mobx';
 import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
+import { postImages } from '../services/images';
 
 export class PostStore {
   @observable status = 'success';
@@ -13,7 +14,7 @@ export class PostStore {
         // Carregar dados da API
         const { data } = yield axios.get('/posts');
         realm.write(() => {
-          data.forEach((item) => {
+          data.forEach((item, index) => {
             realm.create(
               'Post',
               {
@@ -21,6 +22,7 @@ export class PostStore {
                 userId: item.userId,
                 title: item.title,
                 body: item.body,
+                image: postImages[index % postImages.length],
               },
               UpdateMode.Never,
             );

@@ -7,5 +7,6 @@ Album.schema = {
     id: 'int',
     userId: 'int',
     title: 'string',
+    image: 'string',
   },
 };

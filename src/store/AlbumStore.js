@@ -2,6 +2,7 @@ import { observable, action, flow } from 'mobx';
 import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
+import { albumImages } from '../services/images';
 
 export class AlbumStore {
   @observable status = 'success';
@@ -13,13 +14,14 @@ export class AlbumStore {
         // Carregar dados da API
         const { data } = yield axios.get('/albums');
         realm.write(() => {
-          data.forEach((item) => {
+          data.forEach((item, index) => {
             realm.create(
               'Album',
               {
                 id: item.id,
                 userId: item.userId,
                 title: item.title,
+                image: albumImages[index % albumImages.length],
               },
               UpdateMode.Never,
             );

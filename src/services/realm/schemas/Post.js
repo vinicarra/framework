@@ -8,5 +8,6 @@ Post.schema = {
     userId: 'int',
     title: 'string',
     body: 'string',
+    image: 'string',
   },
 };
