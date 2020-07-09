@@ -1,13 +1,10 @@
 import { Image } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Wrapper = styled.View`
-  margin-horizontal: 10px;
-  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2);
-`;
-
 export const Post = styled.View`
   background-color: white;
+  margin-horizontal: 10px;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2);
 `;
 
 export const Header = styled.View`
@@ -31,7 +28,7 @@ export const Name = styled.Text`
 
 export const PostImage = styled(Image)`
   width: 100%;
-  height: 200px;
+  height: 300px;
 `;
 
 export const Body = styled.View`

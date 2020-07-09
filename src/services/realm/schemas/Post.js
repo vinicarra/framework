@@ -9,5 +9,6 @@ Post.schema = {
     title: 'string',
     body: 'string',
     image: 'string',
+    profileImage: 'string',
   },
 };

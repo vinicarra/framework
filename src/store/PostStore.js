@@ -2,7 +2,7 @@ import { observable, action, flow } from 'mobx';
 import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
-import { postImages } from '../services/images';
+import { postImages, profileImage } from '../services/images';
 
 export class PostStore {
   @observable status = 'success';
@@ -23,6 +23,7 @@ export class PostStore {
                 title: item.title,
                 body: item.body,
                 image: postImages[index % postImages.length],
+                profileImage,
               },
               UpdateMode.Never,
             );
