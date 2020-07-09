@@ -34,7 +34,7 @@ export default function Routes() {
         name="TodoList"
         component={TodoList}
         options={{
-          title: "To-do's",
+          title: 'Tarefas',
           tabBarIcon: ({ size, color }) => (
             <Icon name="check-square-o" size={size} color={color} />
           ),

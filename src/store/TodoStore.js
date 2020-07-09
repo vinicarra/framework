@@ -3,24 +3,24 @@ import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
 
-export class PostStore {
+export class TodoStore {
   @observable status = 'success';
 
-  fetchPosts = flow(function* () {
+  fetchTodos = flow(function* () {
     this.status = 'loading';
     try {
-      if (realm.objects('Post').length < 1) {
+      if (realm.objects('Todo').length < 1) {
         // Carregar dados da API
-        const { data } = yield axios.get('/posts');
+        const { data } = yield axios.get('/todos');
         realm.write(() => {
           data.forEach((item) => {
             realm.create(
-              'Post',
+              'Todo',
               {
                 id: item.id,
                 userId: item.userId,
                 title: item.title,
-                body: item.body,
+                completed: item.completed,
               },
               UpdateMode.Never,
             );

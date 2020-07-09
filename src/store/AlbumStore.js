@@ -3,24 +3,23 @@ import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
 
-export class PostStore {
+export class AlbumStore {
   @observable status = 'success';
 
-  fetchPosts = flow(function* () {
+  fetchAlbums = flow(function* () {
     this.status = 'loading';
     try {
-      if (realm.objects('Post').length < 1) {
+      if (realm.objects('Album').length < 1) {
         // Carregar dados da API
-        const { data } = yield axios.get('/posts');
+        const { data } = yield axios.get('/albums');
         realm.write(() => {
           data.forEach((item) => {
             realm.create(
-              'Post',
+              'Album',
               {
                 id: item.id,
                 userId: item.userId,
                 title: item.title,
-                body: item.body,
               },
               UpdateMode.Never,
             );
