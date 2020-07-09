@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, SafeAreaView } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import realm from '../../services/realm';
-import { useStores } from '../../hooks/use-stores';
+import { useStores } from '../../hooks';
 import { AlbumListItem } from '../../components';
 
 const AlbumList = observer(() => {

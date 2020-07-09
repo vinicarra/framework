@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import realm from '../../services/realm';
-import { useStores } from '../../hooks/use-stores';
+import { useForceUpdate, useStores } from '../../hooks';
+import TodoListItem from '../../components/TodoListItem';
 
 const TodoList = observer(() => {
   const [toDos, setToDos] = useState([]);
+  const forceUpdate = useForceUpdate();
   const { todoStore } = useStores();
+
+  const toggleTodo = (id, completed) => {
+    todoStore.toggle(id, completed);
+    forceUpdate();
+  };
 
   useEffect(() => {
     todoStore.fetchTodos();
     setToDos(realm.objects('Todo'));
   }, [todoStore]);
 
-  const renderItem = ({ item }) => {
-    return <Text>{item.title}</Text>;
-  };
-
   return (
     <SafeAreaView>
       <FlatList
         data={toDos}
-        renderItem={renderItem}
+        renderItem={({ item }) => (
+          <TodoListItem
+            todo={item}
+            onPress={() => toggleTodo(item.id, item.completed)}
+          />
+        )}
         keyExtractor={(item) => String(item.id)}
         refreshing={todoStore.status === 'loading'}
       />

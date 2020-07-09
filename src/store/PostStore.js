@@ -5,7 +5,7 @@ import axios from '../services/api';
 import { postImages, profileImage } from '../services/images';
 
 export class PostStore {
-  @observable status = 'success';
+  @observable status = 'loading';
 
   fetchPosts = flow(function* () {
     this.status = 'loading';

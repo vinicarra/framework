@@ -5,7 +5,7 @@ import axios from '../services/api';
 import { albumImages } from '../services/images';
 
 export class AlbumStore {
-  @observable status = 'success';
+  @observable status = 'loading';
 
   fetchAlbums = flow(function* () {
     this.status = 'loading';

@@ -4,7 +4,14 @@ import realm from '../services/realm';
 import axios from '../services/api';
 
 export class TodoStore {
-  @observable status = 'success';
+  @observable status = 'loading';
+
+  @action
+  toggle(id, completed) {
+    realm.write(() => {
+      realm.create('Todo', { id, completed: !completed }, UpdateMode.Modified);
+    });
+  }
 
   fetchTodos = flow(function* () {
     this.status = 'loading';
