@@ -24,7 +24,7 @@ export const ProfileImage = styled(Image)`
 `;
 
 export const Name = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-left: 10px;
 `;
