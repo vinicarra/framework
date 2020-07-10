@@ -1,11 +1,11 @@
-import { observable, action, flow } from 'mobx';
+import { observable, action, flow, decorate } from 'mobx';
 import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
 import { postImages, profileImage } from '../services/images';
 
-export class PostStore {
-  @observable status = 'loading';
+class PostStore {
+  status = 'loading';
 
   fetchPosts = flow(function* () {
     this.status = 'loading';
@@ -36,3 +36,8 @@ export class PostStore {
     }
   });
 }
+
+export default decorate(PostStore, {
+  status: observable,
+  fetchPosts: action,
+});

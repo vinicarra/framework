@@ -1,11 +1,11 @@
-import { observable, action, flow } from 'mobx';
+import { observable, action, flow, decorate } from 'mobx';
 import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
 import { albumImages } from '../services/images';
 
-export class AlbumStore {
-  @observable status = 'loading';
+class AlbumStore {
+  status = 'loading';
 
   fetchAlbums = flow(function* () {
     this.status = 'loading';
@@ -34,3 +34,8 @@ export class AlbumStore {
     }
   });
 }
+
+export default decorate(AlbumStore, {
+  status: observable,
+  fetchAlbums: action,
+});

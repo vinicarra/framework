@@ -1,12 +1,11 @@
-import { observable, action, flow } from 'mobx';
+import { observable, action, flow, decorate } from 'mobx';
 import { UpdateMode } from 'realm';
 import realm from '../services/realm';
 import axios from '../services/api';
 
-export class TodoStore {
-  @observable status = 'loading';
+class TodoStore {
+  status = 'loading';
 
-  @action
   toggle(id, completed) {
     realm.write(() => {
       realm.create('Todo', { id, completed: !completed }, UpdateMode.Modified);
@@ -40,3 +39,9 @@ export class TodoStore {
     }
   });
 }
+
+export default decorate(TodoStore, {
+  status: observable,
+  fetchTodos: action,
+  toggle: action,
+});
