@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import realm from '../../services/realm';
 import { useForceUpdate, useStores } from '../../hooks';
-import TodoListItem from '../../components/TodoListItem';
+import { Loading, TodoListItem } from '../../components';
 
 const TodoList = observer(() => {
   const [toDos, setToDos] = useState([]);
@@ -19,6 +19,10 @@ const TodoList = observer(() => {
     todoStore.fetchTodos();
     setToDos(realm.objects('Todo'));
   }, [todoStore]);
+
+  if (todoStore.status !== 'success') {
+    return <Loading status={todoStore.status} retry={todoStore.fetchPosts} />;
+  }
 
   return (
     <SafeAreaView>

@@ -3,7 +3,7 @@ import { View, FlatList, SafeAreaView } from 'react-native';
 import { observer } from 'mobx-react-lite';
 import realm from '../../services/realm';
 import { useStores } from '../../hooks';
-import { AlbumListItem } from '../../components';
+import { AlbumListItem, Loading } from '../../components';
 
 const AlbumList = observer(() => {
   const [albums, setAlbums] = useState([]);
@@ -13,6 +13,10 @@ const AlbumList = observer(() => {
     albumStore.fetchAlbums();
     setAlbums(realm.objects('Album'));
   }, [albumStore]);
+
+  if (albumStore.status !== 'success') {
+    return <Loading status={albumStore.status} retry={albumStore.fetchPosts} />;
+  }
 
   return (
     <SafeAreaView>

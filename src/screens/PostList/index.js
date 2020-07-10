@@ -14,8 +14,8 @@ const PostList = observer(() => {
     setPosts(realm.objects('Post'));
   }, [postStore]);
 
-  if (postStore.status === 'loading') {
-    return <Loading />;
+  if (postStore.status !== 'success') {
+    return <Loading status={postStore.status} retry={postStore.fetchPosts} />;
   }
 
   return (

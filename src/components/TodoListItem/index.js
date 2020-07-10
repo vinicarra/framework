@@ -7,7 +7,7 @@ export default function TodoListItem({ todo, onPress }) {
     <Touchable onPress={onPress}>
       <Todo>
         <Check checked={todo.completed}>
-          {todo.completed && <Icon name="check" color="white" size={24} />}
+          {todo.completed && <Icon name="check" color="white" size={18} />}
         </Check>
         <Title>{todo.title}</Title>
       </Todo>

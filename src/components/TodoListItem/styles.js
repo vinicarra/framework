@@ -13,9 +13,9 @@ export const Todo = styled.View`
 `;
 
 export const Check = styled.View`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, ${({ checked }) => (checked ? '0' : '0.4')});
   background-color: ${({ checked }) =>
     checked ? 'rgb(0, 122, 255)' : 'white'};
